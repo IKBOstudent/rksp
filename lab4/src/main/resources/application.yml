@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: pr4
+
+  datasource:
+    root-url: jdbc:postgresql://localhost:5432/
+    url: jdbc:postgresql://localhost:5432/crud
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  rsocket:
+    server:
+      port: 7111
+      
+server:
+  port: 8080
+
