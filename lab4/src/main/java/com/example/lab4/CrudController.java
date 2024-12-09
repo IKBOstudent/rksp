@@ -32,9 +32,13 @@ public class CrudController {
     @Transactional
     public Mono<Void> update(Mono<Crud> crud) {
         crud.subscribe((v) -> {
-            Crud ref = rep.getReferenceById(v.getId());
-            ref.setValue(v.getValue());
-            rep.save(ref);
+            try {
+                Crud ref = rep.getReferenceById(v.getId());
+                ref.setValue(v.getValue());
+                rep.save(ref);
+            } catch(Exception e) {
+                // jakarta.persistence.EntityNotFoundException
+            }
         });
         return Mono.empty();
     }
@@ -56,7 +60,7 @@ public class CrudController {
     @MessageMapping("readIds")
     public Flux<Crud> readIds(Flux<Integer> ids) {
         return ids.bufferTimeout(1000, Duration.ofMillis(100))
-                .map((curIds) -> rep.findAllById(curIds))
+                .map((id) -> rep.findAllById(id))
                 .flatMap(Flux::fromIterable);
     }
 

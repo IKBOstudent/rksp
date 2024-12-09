@@ -1,6 +1,6 @@
 spring:
   application:
-    name: lab4
+    name: crud
 
   datasource:
     url: jdbc:postgresql://localhost:5432/crud
@@ -16,10 +16,5 @@ spring:
       ddl-auto: create-drop
       format_sql: true
 
-  rsocket:
-    server:
-      port: 7111
-      
 server:
-  port: 8080
-
+  port: 8082
