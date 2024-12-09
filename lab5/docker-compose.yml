@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres
+    environment:
+        - POSTGRES_PASSWORD=postgres
+    ports:
+        - "7777:5432"
+
+  app1:
+    build: ./uploadServer
+    depends_on:
+      - db
+    volumes:
+      - ./file-storage:/file-storage
+    environment:
+      - app.path.upload.path=/file-storage
+
+  app2:
+    build: ./uploadServer
+    depends_on:
+      - db
+    volumes:
+      - ./file-storage:/file-storage
+    environment:
+      - app.path.upload.path=/file-storage
+
+  app3:
+    build: ./uploadServer
+    depends_on:
+      - db
+    volumes:
+      - ./file-storage:/file-storage
+    environment:
+      - app.path.upload.path=/file-storage
+
+  app4:
+    build: ./uploadServer
+    depends_on:
+      - db
+    volumes:
+      - ./file-storage:/file-storage
+    environment:
+      - app.path.upload.path=/file-storage
+
+  ingress:
+    build: ./ingress
+    ports:
+      - "5000:80"
+    depends_on:
+      - app1
+      - app2
+      - app3
+      - app4

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Отправка файла на сервер</title>
+</head>
+
+<body>
+    <table th:each="file: ${files}">
+        <a th:href="'/download/' + ${file}" th:text="${file}"></a>
+    </table>
+    <form enctype="multipart/form-data" action="save" method="post">
+        <p><input type="file" name="file">
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+</body>
+
+</html>
